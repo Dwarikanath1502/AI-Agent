@@ -52,7 +52,7 @@ def summariseTasks(tasks):
 
 if __name__ == "__main__":
     taskText = readTasks("taskfile.txt") 
-    summary = summeriseTasks(taskText)
+    summary = summariseTasks(taskText)
 
 
     print("\n Task Summary \n")
