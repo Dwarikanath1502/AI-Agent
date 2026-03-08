@@ -17,8 +17,44 @@ def readTasks(filePath):
 #make a call to openai with prompt to categories our tasks
 
 def summeriseTasks(tasks):
-    prompt = f""" My Prompt"""
+    prompt = f"""
+    You are a smart task planning agenet. GIven a list f of tasks categorise them into three
+    categories/priorities bucket:
+    - High Priority
+    - Medium priority
+    - Low Priority
 
-    client.chat.completions.create(
-        model = ""
+    Tasks: 
+    {tasks}
+    
+    Return the response in this format:
+    High Priority
+        - Task 1
+        - Task 2
+    Medium Priority
+        - Task 1
+        - Task 2
+    Low Priority
+        - Task 1
+        - Task 2
+"""
+
+    response = client.chat.completions.create(
+        model = "gpt-4",
+        messages = [
+            {"role": "user", "content": prompt}
+        ]
     )
+
+
+    return response.choices[0].message.content
+
+
+if __name__ == "__main__":
+    taskText = readTasks("taskfile.txt") 
+    summary = summeriseTasks(taskText)
+
+
+    print("\n Task Summary \n")
+    print("-" * 30)
+    print(summary)
