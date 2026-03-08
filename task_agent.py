@@ -12,11 +12,11 @@ client = OpenAI()
 # read task from file
 def readTasks(filePath):
     with open(filePath, "r") as f:
-        f.read()
+       return f.read()
 
 #make a call to openai with prompt to categories our tasks
 
-def summeriseTasks(tasks):
+def summariseTasks(tasks):
     prompt = f"""
     You are a smart task planning agenet. GIven a list f of tasks categorise them into three
     categories/priorities bucket:
@@ -40,11 +40,11 @@ def summeriseTasks(tasks):
 """
 
     response = client.chat.completions.create(
-        model = "gpt-4",
-        messages = [
-            {"role": "user", "content": prompt}
-        ]
-    )
+    model="gpt-4.1-mini",
+    messages=[
+        {"role": "user", "content": prompt}
+    ]
+)
 
 
     return response.choices[0].message.content
